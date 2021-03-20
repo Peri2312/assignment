@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Recipe } from './recipe.model';
 
+import { Recipe } from './recipe.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +10,36 @@ export class RecipesService {
     {
       id: 'r1',
       title: 'Schnitzel',
-      imageUrl: 'https://www.thespruceeats.com/thmb/cckc3_4QUQ79kSFhcLPM8xg9F3g=/3797x2848/smart/filters:no_upscale()/wiener-schnitzel-recipe-1447089-Hero-5b587d6c46e0fb0071b0059d.jpg',
-      ingredients: ['French Fries', 'Meat', 'Salad']
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Schnitzel.JPG/1024px-Schnitzel.JPG',
+      ingredients: ['French Fries', 'Pork Meat', 'Salad']
     },
     {
       id: 'r2',
       title: 'Spaghetti',
-      imageUrl: 'https://www.spendwithpennies.com/wp-content/uploads/2019/03/Spaghetti-and-Meatballs-SpendWithPennies-4.jpg',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/1024px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg',
       ingredients: ['Spaghetti', 'Meat', 'Tomatoes']
     }
   ];
 
-  constructor() { }
+  constructor() {}
 
-  getAllRecipes(): Recipe[] {
-    return [... this.recipes];
+  getAllRecipes() {
+    return [...this.recipes];
   }
-  getRecipe(recipeId: string): Recipe {
+
+  getRecipe(recipeId: string) {
     return {
       ...this.recipes.find(recipe => {
-        return recipe.id === recipeId
+        return recipe.id === recipeId;
       })
-    }
+    };
+  }
+
+  deleteRecipe(recipeId: string) {
+    this.recipes = this.recipes.filter(recipe => {
+      return recipe.id !== recipeId;
+    });
   }
 }
